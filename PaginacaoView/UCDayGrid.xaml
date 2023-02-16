@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="PaginacaoView.UcDayGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PaginacaoView"
+             mc:Ignorable="d"
+             x:Name="Control"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1"/>
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1"/>
+        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1"/>
+        <Border Grid.Row="3" BorderBrush="Black" BorderThickness="1"/>
+        <Border Grid.Row="4" BorderBrush="Black" BorderThickness="1"/>
+        <Border Grid.Row="5" BorderBrush="Black" BorderThickness="1"/>
+        
+        <TextBlock 
+            Grid.Row="0"
+            x:Name="Header"
+            Text="{Binding DayName, ElementName=Control}"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center" />
+        <ContentControl
+            Grid.Row="1"
+            x:Name="H0"
+            Margin="2"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            />
+        <ContentControl
+            Grid.Row="2"
+            x:Name="H1"
+            Margin="2"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            />
+        <ContentControl
+            Grid.Row="3"
+            x:Name="H2"
+            Margin="2"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            />
+        <ContentControl
+            Grid.Row="4"
+            x:Name="H3"
+            Margin="2"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            />
+        <ContentControl
+            Grid.Row="5"
+            x:Name="H4"
+            Margin="2"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            />
+    </Grid>
+</UserControl>

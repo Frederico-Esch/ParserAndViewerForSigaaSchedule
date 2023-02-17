@@ -5,10 +5,10 @@ using System.Windows.Controls;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Shapes;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using PaginacaoView.Models;
+using PaginacaoView.FileParser;
 
 namespace PaginacaoView
 {
@@ -39,8 +39,20 @@ namespace PaginacaoView
             }
             _turmas = JsonConvert.DeserializeObject<Turma[]>(data)?.Where(t => t.Permission).ToArray() ?? Array.Empty<Turma>();
             
+            UpdateSchedule();
+        }
+
+        private void UpdateSchedule()
+        {
             if(ListaTurmas.Items.Count > 0) ListaTurmas.Items.Clear();
-            foreach (var item in _horarios) item.Value.Clear();
+            foreach (var item in _horarios)
+            {
+                foreach (var hour in item.Value.Keys)
+                {
+                    _horarioViews[item.Key].Horarios[hour].Content = null;
+                }
+                item.Value.Clear();
+            }
             foreach (var turma in _turmas)
             {
                 foreach (var dayHour in turma.DayHour) { dayHour.Hour -= 1; }
@@ -150,7 +162,7 @@ namespace PaginacaoView
             ListaTurmas.UnselectAll();
         }
 
-        private void HandleSelectFileButton(object sender, EventArgs e)
+        private void HandleSelectJsonButton(object sender, EventArgs e)
         {
             var fileSelector = new OpenFileDialog
             {
@@ -159,6 +171,18 @@ namespace PaginacaoView
             };
             if ((!(fileSelector.ShowDialog() ?? false)) || !fileSelector.CheckFileExists) return;
             LoadContentFromJson(fileSelector.FileName);
+        }
+
+        private void HandleSelectHtmlButton(object sender, EventArgs e)
+        {
+            var fileDialog = new OpenFileDialog()
+            {  
+                Filter = @"Html|*.html"
+            };
+            if (!fileDialog.ShowDialog() ?? false || !fileDialog.CheckFileExists) return;
+
+            _turmas = Parser.Parse(fileDialog.FileName).Where(t => t.Permission).ToArray();
+            UpdateSchedule();
         }
     }
 }

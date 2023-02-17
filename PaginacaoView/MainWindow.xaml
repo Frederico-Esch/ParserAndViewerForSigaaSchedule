@@ -79,8 +79,15 @@
         <DockPanel Grid.Column="2" Margin="5">
             <Button
                 DockPanel.Dock="Bottom"
-                Click="HandleSelectFileButton">
-                <TextBlock Text="Abrir arquivo"/>
+                Margin="5"
+                Click="HandleSelectJsonButton">
+                <TextBlock Text="Abrir Json"/>
+            </Button>
+            <Button
+                DockPanel.Dock="Bottom"
+                Margin="5"
+                Click="HandleSelectHtmlButton">
+                <TextBlock Text="Abrir HTML"/>
             </Button>
             <ListView
                   x:Name="ListaTurmas"
